@@ -8,6 +8,9 @@ get new versions of the asset/infrastructure files - which will then be copied i
 in situ as appropriate. You don't have to run "rake spree:upgrade" in (each of) your projects 
 any more, plus the changes you need to incorporate are more visible...
 
+You probably don't want the versions of the files in here: you should run "rake upgrade" right away 
+to get it sync'd with your spree version.
+
 NOTE: you must run "rake upgrade", to avoid running spree's default task
 
 # Usage 
