@@ -31,12 +31,13 @@ Spree::Initializer.run do |config|
   config.gem "activemerchant", :lib => "active_merchant", :version => '>=1.4.1'
   config.gem "tlsmail", :version => '0.0.1'
   config.gem 'activerecord-tableless', :lib => 'tableless', :version => '>=0.1.0'
-  config.gem 'haml-edge', :lib=> 'haml', :version => "2.1.37"
+  config.gem 'haml-edge', :lib=> 'haml', :version => ">=2.1.37"
   config.gem 'chriseppstein-compass', :lib => 'compass', :source => "http://gems.github.com", :version => '0.6.15'
   config.gem 'calendar_date_select', :version => '1.15'    
   config.gem 'rsl-stringex', :lib => 'stringex', :source => "http://gems.github.com"
-
-  config.gem 'searchlogic', :version => '2.1.13'
+  config.gem 'chronic' #required for whenever
+  config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
+  config.gem 'searchlogic', :version => '>= 2.3.5'
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', 
         :source => 'http://gems.github.com'
 
@@ -71,7 +72,8 @@ Spree::Initializer.run do |config|
   # All files from config/locales/*.rb,yml are added automatically.
   #config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   config.i18n.default_locale = :'en-US'    
-    
+
+  config.active_record.observers = :order_observer
 end
 
 Time::DATE_FORMATS[:date_time24] = "%Y-%m-%d %H:%M"
