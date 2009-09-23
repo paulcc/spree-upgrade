@@ -4,7 +4,7 @@ import File.join(SPREE_ROOT, 'Rakefile')
 
 
 desc "do local upgrade and hide risky files"
-task :upgrade => ["unhide_files", "spree:upgrade", "version", "hide_files"] do
+task :upgrade => ["unhide_files", "do_upgrade", "version", "hide_files"] do
   puts "Look for files with a '~' suffix."
   puts "These are the previous versions and might need to be reviewed/merged."
   puts "Then you might need to copy some other config files after merging etc:"
@@ -24,6 +24,11 @@ task :version do
   end
   version = version.chomp + ' -- ' + Time.now.to_s
   File.open("version","w") {|f| f.write version}
+end
+
+desc "do the actual upgrade by running the script"
+task :do_upgrade do
+  `vendor/spree/bin/spree -u`
 end
 
 desc "hide conflicting files"
